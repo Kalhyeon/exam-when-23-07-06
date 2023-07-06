@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="layout.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="read.js"></script>
+  <title>LAYOUT PAGE</title>
+  <script>
+    $(document).ready(async function() {
+      const no = getPageno();
+      if(no===null) {
+        alert('올바르지 않은 접근 경로입니다.');
+        location.href = "index.html";
+      }
+      const result = await fetch(no);
+      if(result===null) {
+        alert('서버가 응답하지 않습니다.');
+        location.href = "index.html";
+      }
+      console.log(result);
+      printContact(result);
+    });
+  </script>
+</head>
+<body>
+  <div id="page">
+    <header>
+      <h1>Kal's page of ICIA</h1>
+    </header>
+    <nav>
+      <a type="button" class="btn btn-outline-primary" href="index.html">HOME</a>
+    </nav>
+    <main>
+      <aside></aside>
+      <section>
+        <li><img id="photo"></li>
+        <li id="name"></li>
+        <li id="address"></li>
+        <li id="tel"></li>
+      </section>
+      <aside></aside>
+    </main>
+    <footer>
+      Copyright &copy;2023 ICIA All Right Reserved
+    </footer>
+  </div>
+</body>
+</html>
